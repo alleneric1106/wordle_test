@@ -45,6 +45,8 @@ WORD_BANK = [
 # 記憶體儲存遊戲狀態：{game_id: {"target": "APPLE", "status": "PLAYING"}}
 games_db: Dict[str, dict] = {}
 
+total_games = 0
+wins = 0
 
 class GuessRequest(BaseModel):
     game_id: str
@@ -75,8 +77,8 @@ def process_guess(req: GuessRequest):
     if len(guess) != 5:
         raise HTTPException(status_code=400, detail="Word must be 5 letters.")
 
-    #if GuessRequest !="target":
-        #raise HTTPException(status_code=400, detail="Word not in dictionary.")
+    if guess not in WORD_BANK:
+        raise HTTPException(status_code=400, detail="Word not in dictionary.")
 
     target = games_db[game_id]["target"]
     feedback = ["absent"] * 5  # 預設灰色 absent

@@ -75,8 +75,8 @@ def process_guess(req: GuessRequest):
     if len(guess) != 5:
         raise HTTPException(status_code=400, detail="Word must be 5 letters.")
 
-    if GuessRequest not in WORD_BANK:
-        raise HTTPException(status_code=400, detail="Word not in dictionary.")
+    #if GuessRequest !="target":
+        #raise HTTPException(status_code=400, detail="Word not in dictionary.")
 
     target = games_db[game_id]["target"]
     feedback = ["absent"] * 5  # 預設灰色 absent
